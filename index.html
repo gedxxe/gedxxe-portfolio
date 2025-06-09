@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gedxxe-portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      cursor: none; /* Hide default system cursor for the body */
+    }
+    .font-jetbrains-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .font-sf-pro { /* Utility class if needed, though body sets the base */
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+    .animate-pulse-glow {
+      animation: pulse-glow 3s infinite ease-in-out;
+    }
+
+    /* Ensure interactive elements also hide the default system cursor */
+    a,
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="checkbox"], /* Added checkbox */
+    input[type="radio"],    /* Added radio */
+    select,
+    label[for],
+    [role="button"] {
+      cursor: none !important;
+    }
+
+    /* Custom Cursor Styles - CSS Only Rainbow Gradient Pointer */
+    :root {
+      --cursor-width: 18px;  /* Base width of the element for the pointer shape */
+      --cursor-height: 26px; /* Base height, creating a typical pointer aspect ratio */
+      
+      /* Hotspot: Offset from the element's top-left to its visual tip.
+         For an upward triangle (polygon(50% 0%, ...)) with transform-origin: 50% 0%,
+         the hotspot (tip) is at half the width and 0 height. */
+      --cursor-hotspot-x: 9px;  /* calc(var(--cursor-width) / 2) */
+      --cursor-hotspot-y: 0px; 
+    }
+
+    .custom-cursor-pointer {
+      position: fixed;
+      width: var(--cursor-width);
+      height: var(--cursor-height);
+      pointer-events: none; /* Allows clicks to pass through */
+      z-index: 9999;
+      opacity: 1;
+      
+      /* Rainbow gradient background */
+      background: conic-gradient(
+        from 90deg, 
+        hsl(0, 100%, 60%), 
+        hsl(30, 100%, 60%), 
+        hsl(60, 100%, 60%), 
+        hsl(120, 100%, 60%), 
+        hsl(180, 100%, 60%), 
+        hsl(240, 100%, 60%), 
+        hsl(300, 100%, 60%), 
+        hsl(0, 100%, 60%) 
+      );
+      
+      /* Create an upward-pointing triangle shape */
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%); 
+      
+      /* Position the tip (originally at 50% 0%) at the mouse cursor
+         and angle it like a standard pointer.
+         The JS sets left/top to mouseX - hotspotX, mouseY - hotspotY.
+         This places the defined hotspot (50% 0% of the element) at the mouse cursor.
+      */
+      transform-origin: 50% 0%; /* Rotate and scale around its tip (center-top of the polygon) */
+      transform: rotate(-30deg); /* Angle it like a cursor (e.g., -30deg or -45deg) */
+
+      transition: transform 0.1s ease-out, opacity 0.2s ease-in-out;
+    }
+
+    /* Hover state for cursor */
+    body.cursor-hover .custom-cursor-pointer {
+      /* Apply scaling on top of the existing rotation */
+      transform: rotate(-30deg) scale(1.2); 
+    }
+    
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-white text-gray-800">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
