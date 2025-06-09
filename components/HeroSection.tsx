@@ -29,10 +29,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ id }) => {
             <div 
               className="w-48 h-64 sm:w-60 sm:h-80 md:w-64 md:h-96 rounded-lg shadow-2xl overflow-hidden relative mb-6 bg-gray-200" // Added bg-gray-200 for loading state
             >
-              <img 
-                src="/public/images/fotodiri.jpg" // Path changed back
-                alt="I Gede Bagus Jayendra" 
-                className="w-full h-full object-cover" 
+              <img
+                src="/images/fotodiri.jpg"
+                alt="I Gede Bagus Jayendra"
+                className="w-full h-full object-cover"
               />
             </div>
             <SocialLinks links={SOCIAL_LINKS} />
